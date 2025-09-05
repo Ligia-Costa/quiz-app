@@ -1,39 +1,84 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-// Importa nosso banco de dados de perguntas
-import questions from '../questions.json';
+// Definimos o formato de um objeto de pergunta para reutilizar o tipo
+type Question = {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+};
 
-export default function QuizScreen() {
-  // Por enquanto, vamos pegar apenas a primeira pergunta da lista (índice 0)
-  const currentQuestion = questions[0];
+// formato das props que o componente espera
+type QuizScreenProps = {
+  currentQuestion: Question;
+  selectedOption: string | null;
+  isOptionsDisabled: boolean;
+  onOptionPress: (option: string) => void;
+  onNextQuestion: () => void;
+};
+
+// tipos para a função
+export default function QuizScreen({
+  currentQuestion,
+  selectedOption,
+  isOptionsDisabled,
+  onOptionPress,
+  onNextQuestion,
+}: QuizScreenProps) {
+
+  const getOptionStyle = (option: string) => {
+    if (selectedOption) {
+      const isCorrect = option === currentQuestion.correctAnswer;
+      if (isCorrect) {
+        return styles.correctOption;
+      }
+      if (option === selectedOption && !isCorrect) {
+        return styles.incorrectOption;
+      }
+    }
+    return {};
+  };
 
   return (
     <View style={styles.container}>
-      {/* Container para a Pergunta */}
       <View style={styles.questionContainer}>
-        {/* Exibimos a propriedade "question" do nosso objeto */}
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </View>
 
-      {/* Container para as Alternativas */}
       <View style={styles.optionsContainer}>
-        {/* Usamos .map() para criar um botão para cada item no array "options" */}
         {currentQuestion.options.map((option) => (
-          <TouchableOpacity key={option} style={styles.option}>
+          <TouchableOpacity
+            key={option}
+            style={[styles.option, getOptionStyle(option)]}
+            onPress={() => onOptionPress(option)}
+            disabled={isOptionsDisabled}
+          >
             <Text style={styles.optionText}>{option}</Text>
           </TouchableOpacity>
         ))}
       </View>
+        {/* renderizando o botão */}
+      {selectedOption && (
+        <TouchableOpacity style={styles.nextButton} onPress={onNextQuestion}>
+          <Text style={styles.nextButtonText}>Próxima Pergunta</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
 
-// Os estilos que criamos no capítulo anterior continuam os mesmos
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#77b5ecff',
     padding: 16,
+  },
+  scoreContainer: {
+    marginBottom: 20,
+  },
+  scoreText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   questionContainer: {
     flex: 1,
@@ -61,5 +106,27 @@ const styles = StyleSheet.create({
   },
   optionText: {
     fontSize: 18,
+  },
+  correctOption: {
+    borderColor: '#4CAF50',
+    backgroundColor: '#D4EDDA',
+    borderWidth: 2,
+  },
+  incorrectOption: {
+    borderColor: '#F44336',
+    backgroundColor: '#F8D7DA',
+    borderWidth: 2,
+  },
+  nextButton: {
+    backgroundColor: '#007BFF',
+    padding: 15,
+    borderRadius: 12,
+    marginTop: 20,
+    alignItems: 'center'
+  },
+  nextButtonText: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
