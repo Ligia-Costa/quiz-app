@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Animated } from 'react-native';
-import { useRef, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 
 // Definimos o formato de um objeto de pergunta para reutilizar o tipo
 type Question = {
@@ -15,7 +14,7 @@ type QuizScreenProps = {
   isOptionsDisabled: boolean;
   onOptionPress: (option: string) => void;
   onNextQuestion: () => void;
-  timeLeft: number; // Adicionando o tempo restante
+  timeLeft: number; 
 };
 
 // tipos para a função
@@ -27,16 +26,6 @@ export default function QuizScreen({
   onNextQuestion,
   timeLeft,
 }: QuizScreenProps) {
-  const fadeAnim = useRef(new Animated.Value(0)).current; // Inicia a animação com opacidade 0
-
-  useEffect(() => {
-    // Anima a entrada da pergunta a cada vez que o componente é renderizado com uma nova pergunta
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  }, [currentQuestion]);
 
   const getOptionStyle = (option: string) => {
     if (selectedOption) {
@@ -57,9 +46,9 @@ export default function QuizScreen({
         <Text style={styles.timerText}>{timeLeft}</Text>
       </View>
 
-      <Animated.View style={[styles.questionContainer, { opacity: fadeAnim }]}>
+      <View style={styles.questionContainer}>
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
-      </Animated.View>
+      </View>
 
       <View style={styles.optionsContainer}>
         {currentQuestion.options.map((option) => (
