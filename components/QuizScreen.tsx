@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 
 // Definimos o formato de um objeto de pergunta para reutilizar o tipo
 type Question = {
@@ -39,7 +39,7 @@ export default function QuizScreen({
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.questionContainer}>
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </View>
@@ -62,7 +62,7 @@ export default function QuizScreen({
           <Text style={styles.nextButtonText}>Próxima Pergunta</Text>
         </TouchableOpacity>
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#77b5ecff',
-    padding: 16,
+    paddingVertical: 80,
+    paddingHorizontal: 15
   },
   scoreContainer: {
     marginBottom: 20,
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
     borderRadius: 12,
-    padding: 16,
+    padding: 12,
     justifyContent: 'center',
     marginBottom: 20,
   },
@@ -99,13 +100,13 @@ const styles = StyleSheet.create({
   },
   option: {
     backgroundColor: '#ffffff',
-    padding: 16,
+    padding: 13,
     borderRadius: 12,
     borderWidth: 2,
     borderColor: '#031663ff',
   },
   optionText: {
-    fontSize: 18,
+    fontSize: 17,
   },
   correctOption: {
     borderColor: '#4CAF50',
