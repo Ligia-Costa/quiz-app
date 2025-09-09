@@ -4,16 +4,18 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 type ResultScreenProps = {
     score: number;
     totalQuestions: number;
+    highScore: number;
     onPlayAgain: () => void; //função para o botão
 };
 
-export default function ResultsScreen({ score, totalQuestions, onPlayAgain}: ResultScreenProps) {
+export default function ResultsScreen({ score, totalQuestions, onPlayAgain, highScore}: ResultScreenProps) {
     return (
     <View style={styles.container}>
       <Text style={styles.title}>Fim do Jogo!</Text>
       <Text style={styles.scoreText}>
         Você acertou {score} de {totalQuestions} perguntas!
       </Text>
+      <Text style={styles.highScoreText}>Seu recorde: {highScore} pontos</Text>
 
       <TouchableOpacity style={styles.button} onPress={onPlayAgain}>
         <Text style={styles.buttonText}>Jogar Novamente</Text>
@@ -37,8 +39,13 @@ const styles = StyleSheet.create({
   },
   scoreText: {
     fontSize: 24,
-    marginBottom: 40,
+    marginBottom: 10,
     color: '#555',
+  },
+  highScoreText: {
+    fontSize: 20,
+    marginBottom: 40,
+    color: '#777',
   },
   button: {
     backgroundColor: '#007BFF',
