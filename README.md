@@ -1,50 +1,95 @@
-# Welcome to your Expo app 👋
+# 📚 PortuPlay – Quiz de Língua Portuguesa
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo desenvolvido em **React Native + Expo** para ajudar estudantes a praticarem conteúdos de **Língua Portuguesa** de forma divertida e gamificada.  
+O app conta com tela inicial estilizada, perguntas embaralhadas, ranking persistente e feedback sonoro/tátil.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Funcionalidades Principais
 
-   ```bash
-   npm install
-   ```
+- 🎮 **Tela Inicial** com logo e botão **Praticar**.
+- ❓ **Perguntas de múltipla escolha** embaralhadas a cada rodada.
+- ⏳ **Cronômetro de 30 segundos por pergunta** (marca como errada se zerar).
+- 📊 **Barra de Progresso** que mostra avanço no quiz (30 questões no total).
+- 🔊 **Feedback sonoro** (acerto/erro) e tátil com Haptics.
+- 🏆 **Ranking persistente** usando `AsyncStorage`:
+  - Jogador insere nome no fim do jogo.
+  - Pontuação é salva e ordenada automaticamente.
+  - Exibe o **Top 10 jogadores**.
+- 📱 **Design responsivo** com uso de `SafeAreaView`.
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🎯 Funcionalidade Adicional: Barra de Progresso + Cronômetro
 
-In the output, you'll find options to open the app in a
+### Descrição
+Essa feature adiciona:
+1. **Barra de Progresso**  
+   - Avança conforme o jogador responde perguntas.  
+   - Progresso calculado como fração (`(índice atual + 1) / total`).  
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+2. **Cronômetro Iniciado com o Jogo**  
+   - Timer de **30 segundos** para cada questão.  
+   - Só começa quando o jogador pressiona **Praticar**.  
+   - Se chegar a zero, a questão é considerada errada e o quiz avança automaticamente.  
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### ⚡ Desafios e Aprendizados
+- Precisei pesquisar sobre o **Hook `useEffect`** para reiniciar o cronômetro a cada nova questão.  
+- Aprendi a usar o **`Animated` do React Native** para criar a barra de progresso sem depender de bibliotecas externas.  
+- Ajustei o cálculo de progresso para trabalhar com **frações (0..1)** em vez de porcentagens.  
+- Refatorei a lógica de controle de estado (`isQuizStarted`) para que o timer só inicie após clicar em **Praticar**.  
 
-## Get a fresh project
+### 🎥 Demonstração
+<video src="../quiz-app/assets/video-quiz.mp4" controls width="400"></video>
 
-When you're ready, run:
+#### Tela Inicial
+<img src="../quiz-app/assets/telainicial.png" width="300" />
 
-```bash
-npm run reset-project
+#### Barra de Progresso + Timer
+<img src="../quiz-app/assets/barraprogresso.png" width="300" />
+
+#### Ranking Final
+<img src="../quiz-app/assets/ranking.png" width="300" />
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- **React Native + Expo**
+- **TypeScript**
+- **AsyncStorage** → salvar ranking e recordes
+- **Expo AV** → sons de acerto/erro
+- **Expo Haptics** → vibração tátil
+- **Animated API** → barra de progresso
+- **SafeAreaView** → layout seguro em iOS/Android
+
+---
+
+## 📌 Como Rodar o Projeto
+
+```cmd
+# 1. Clonar o repositório
+git clone https://github.com/Ligia-Costa/quiz-app.git
+
+# 2. Entrar na pasta
+cd quiz-app
+
+# 3. Instalar dependências
+npm install
+
+# 4. Rodar no Expo
+npm start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 👩🏻‍💻 Projeto desenvolvido por
 
-## Learn more
+**Lígia da Costa Silva**  
+Curso Técnico em Análise e Desenvolvimento de Sistemas - SENAI - 2025
 
-To learn more about developing your project with Expo, look at the following resources:
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](www.linkedin.com/in/lígia-costa-16080118b) 
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/liiih.costa/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Ligia-Costa)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 📄 Licença
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Este projeto está licenciado sob a licença [MIT](https://opensource.org/licenses/MIT).

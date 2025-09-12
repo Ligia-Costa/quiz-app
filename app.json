@@ -42,8 +42,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "70c29af3-c11b-4d72-acdb-3cf5430bdab5"
+        "projectId": "4e303ad6-951e-41ad-9d0b-2295f03373e5"
       }
-    }
+    },
+    "owner": "liih-costa"
   }
 }
