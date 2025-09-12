@@ -1,23 +1,23 @@
-import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Animated } from 'react-native';
 
-// Definimos o formato de um objeto de pergunta para reutilizar o tipo
+// Definindo o formato de um objeto de pergunta
 type Question = {
   question: string;
   options: string[];
   correctAnswer: string;
 };
 
-// formato das props que o componente espera
 type QuizScreenProps = {
   currentQuestion: Question;
   selectedOption: string | null;
   isOptionsDisabled: boolean;
   onOptionPress: (option: string) => void;
   onNextQuestion: () => void;
-  timeLeft: number; 
+  timeLeft: number;
+  progress: number; // FRAÇÃO entre 0 e 1
 };
 
-// tipos para a função
 export default function QuizScreen({
   currentQuestion,
   selectedOption,
@@ -25,7 +25,23 @@ export default function QuizScreen({
   onOptionPress,
   onNextQuestion,
   timeLeft,
+  progress,
 }: QuizScreenProps) {
+  // Animated value para largura da barra
+  const progressAnim = useRef(new Animated.Value(progress)).current;
+
+  useEffect(() => {
+    Animated.timing(progressAnim, {
+      toValue: Math.max(0, Math.min(1, progress)),
+      duration: 400,
+      useNativeDriver: false, // não podemos animar width com native driver
+    }).start();
+  }, [progress]);
+
+  const progressWidth = progressAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0%', '100%'],
+  });
 
   const getOptionStyle = (option: string) => {
     if (selectedOption) {
@@ -42,6 +58,11 @@ export default function QuizScreen({
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Barra de progresso personalizada */}
+      <View style={styles.progressContainer}>
+        <Animated.View style={[styles.progressBar, { width: progressWidth }]} />
+      </View>
+
       <View style={styles.timerContainer}>
         <Text style={styles.timerText}>{timeLeft}</Text>
       </View>
@@ -62,7 +83,7 @@ export default function QuizScreen({
           </TouchableOpacity>
         ))}
       </View>
-        {/* renderizando o botão */}
+
       {selectedOption && (
         <TouchableOpacity style={styles.nextButton} onPress={onNextQuestion}>
           <Text style={styles.nextButtonText}>Próxima Pergunta</Text>
@@ -77,7 +98,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#77b5ecff',
     paddingVertical: 80,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+  },
+  progressContainer: {
+    height: 12,
+    width: '90%',
+    backgroundColor: '#d1e7ff',
+    borderRadius: 10,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    marginBottom: 12,
+  },
+  progressBar: {
+    height: '100%',
+    backgroundColor: '#031663',
   },
   timerContainer: {
     backgroundColor: '#ffffff',
@@ -88,12 +122,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom: 20
+    marginBottom: 10,
   },
   timerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#031663ff'
+    color: '#031663ff',
   },
   questionContainer: {
     flex: 1,
@@ -114,13 +148,13 @@ const styles = StyleSheet.create({
   },
   option: {
     backgroundColor: '#ffffff',
-    padding: 13,
+    padding: 10,
     borderRadius: 12,
     borderWidth: 2,
     borderColor: '#031663ff',
   },
   optionText: {
-    fontSize: 17,
+    fontSize: 15,
   },
   correctOption: {
     borderColor: '#4CAF50',
@@ -137,7 +171,7 @@ const styles = StyleSheet.create({
     padding: 18,
     borderRadius: 12,
     marginTop: 15,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   nextButtonText: {
     color: '#ffffff',
