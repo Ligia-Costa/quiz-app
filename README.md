@@ -40,16 +40,16 @@ Essa feature adiciona:
 - Refatorei a lógica de controle de estado (`isQuizStarted`) para que o timer só inicie após clicar em **Praticar**.  
 
 ### 🎥 Demonstração
-<video src="../quiz-app/assets/video-quiz.mp4" controls width="400"></video>
+<video src="assets/video-quiz.mp4" controls width="400"></video>
 
 #### Tela Inicial
-<img src="../quiz-app/assets/telainicial.png" width="300" />
+<img src="assets/telainicial.png" width="300" />
 
 #### Barra de Progresso + Timer
-<img src="../quiz-app/assets/barraprogresso.png" width="300" />
+<img src="assets/barraprogresso.png" width="300" />
 
 #### Ranking Final
-<img src="../quiz-app/assets/ranking.png" width="300" />
+<img src="assets/ranking.png" width="300" />
 
 ---
 
