@@ -40,6 +40,7 @@ Essa feature adiciona:
 - Refatorei a lógica de controle de estado (`isQuizStarted`) para que o timer só inicie após clicar em **Praticar**.  
 
 ### 🎥 Demonstração
+<img src="assets/teste.gif" width="300" />
 <video src="assets/teste.gif" controls width="400"></video>
 
 #### Tela Inicial
@@ -85,7 +86,7 @@ npm start
 ## Instalação do projeto
 Instale o projeto através do Qr Code ou link:
 - https://expo.dev/accounts/liih-costa/projects/quiz-app/builds/a41fd658-30df-45eb-b54d-fc00abda11ae
-- <img src="assets/qrcode.png" width="300" />
+<img src="assets/qrcode.png" width="300" />
 
 ---
 
