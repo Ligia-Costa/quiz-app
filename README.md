@@ -83,7 +83,7 @@ npm start
 ---
 
 ## Instalação do projeto
-Instale o projeto através do Qr Code ou link:
+Instale o aplicativo através do Qr Code ou link:
 - https://expo.dev/accounts/liih-costa/projects/quiz-app/builds/a41fd658-30df-45eb-b54d-fc00abda11ae
 <img src="assets/qrcode.png" width="300" />
 
