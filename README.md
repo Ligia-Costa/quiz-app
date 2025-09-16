@@ -41,7 +41,6 @@ Essa feature adiciona:
 
 ### 🎥 Demonstração
 <img src="assets/teste.gif" width="300" />
-<video src="assets/teste.gif" controls width="400"></video>
 
 #### Tela Inicial
 <img src="assets/telainicial.png" width="300" />
