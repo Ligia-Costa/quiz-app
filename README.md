@@ -40,7 +40,7 @@ Essa feature adiciona:
 - Refatorei a lógica de controle de estado (`isQuizStarted`) para que o timer só inicie após clicar em **Praticar**.  
 
 ### 🎥 Demonstração
-<video src="assets/video-quiz.mp4" controls width="400"></video>
+<video src="assets/teste.gif" controls width="400"></video>
 
 #### Tela Inicial
 <img src="assets/telainicial.png" width="300" />
